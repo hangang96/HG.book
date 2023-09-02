@@ -88,11 +88,93 @@
         h1 {
             margin: 20px; /* 设置标题的外边距 */
         }
+		
+		 /* 样式化搜索框容器 */
+        #searchContainer {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            border-radius: 20px; /* 圆角边框 */
+            padding: 5px 20px; /* 内边距 */
+            margin: 20px; /* 外边距 */
+        }
 
         /* 样式化搜索框 */
         #searchInput {
-            margin: 10px 20px; /* 设置搜索框的外边距，10px表示上下边距，20px表示左右边距 */
+            flex: 1; /* 让搜索框占据剩余空间 */
+            border: none; /* 移除边框 */
+            background: transparent; /* 透明背景 */
+            font-size: 16px;
+            padding: 10px;
+            outline: none; /* 移除默认的焦点边框 */
         }
+		
+		/* 样式化搜索按钮 */
+        #searchButton {
+            border: none; /* 移除边框 */
+            background-color: transparent; /* 透明背景 */
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* 搜索按钮图标样式 */
+        #searchButton::before {
+            content: "🔍"; /* 放大镜图标 */
+        }
+
+        /* 样式化搜索结果容器 */
+        #searchResults {
+            /* 添加样式化搜索结果的样式 */
+            margin: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            border-radius: 10px; /* 圆角边框 */
+        }
+		
+		
+        /* 为title和搜索框添加浮现效果动画 */
+        @keyframes fadeIn {
+        0% {
+             transform: scale(0);
+             opacity: 0;
+           }
+        100% {
+              transform: scale(1);
+              opacity: 1;
+             }
+         }
+
+         h1, #searchContainer {
+               animation: fadeIn 1s ease-in-out; /* 添加浮现效果动画 */
+         }
+
+         /* 为书脊添加浮现效果动画 */
+         @keyframes fadeInBook {
+         0% {
+             transform: scale(0);
+             opacity: 0;
+            }
+         100% {
+             transform: scale(1);
+             opacity: 1;
+              }
+            }
+
+         .spine-textbox {
+         /* 省略其他样式 */
+          animation: fadeInBook 1s ease-in-out; /* 添加浮现效果动画 */
+            }
+			
+		 /* 为标题添加浮现效果动画 */
+         h1 {
+              animation: fadeIn 1s ease-in-out; /* 添加浮现效果动画 */
+              display: inline-block; /* 使标题水平居中 */
+              background-color: rgba(255, 255, 255, 0.8); /* 添加背景色以增加可读性 */
+              padding: 5px 10px; /* 调整内边距以增加边框空间 */
+              border-radius: 10px; /* 圆角边框 */
+            }
+
 
     </style>
 </head>
@@ -324,8 +406,7 @@
     modal.innerHTML = `
         <h2>${book.title}</h2>
         <p>作者: ${book.author}</p>		
-        <p>${book.description}</p>
-    `;
+        <p>${book.description}</p>`;
     modal.style.display = "block";
 
     // 添加点击模态框以关闭事件
