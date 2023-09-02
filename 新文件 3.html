@@ -192,7 +192,34 @@
               padding: 5px 10px; /* 调整内边距以增加边框空间 */
               border-radius: 10px; /* 圆角边框 */
             }
+		/* 修改搜索结果中的标题样式 */
+		.book-result p:first-child {
+			font-weight: bold; /* 添加加粗效果 */
+		}
+		/* 样式化未出版状态下的小绿点 */
+		.unpublished-dot {
+			width: 8px; /* 小绿点的宽度 */
+			height: 8px; /* 小绿点的高度 */
+			background-color: #00ff00; /* 绿色 */
+			border-radius: 50%; /* 将小绿点设为圆形 */
+			position: absolute; /* 绝对定位 */
+			bottom: 5px; /* 距离底部的距离 */
+			right: 5px; /* 距离右侧的距离 */
+			animation: blink 1s infinite; /* 添加闪烁动画 */
+		}
 
+		/* 定义闪烁动画 */
+		@keyframes blink {
+			0% {
+				opacity: 0; /* 初始透明度为0，即隐藏 */
+			}
+			50% {
+				opacity: 1; /* 中间透明度为1，即显示 */
+			}
+			100% {
+				opacity: 0; /* 结束时透明度为0，再次隐藏 */
+			}
+		}
 
     </style>
 </head>
@@ -224,136 +251,162 @@
 <script>
     // 假设有一个包含书籍信息的数组
     const books = [
-{ title: "语言理解中语义加工的认知和神经机制", author: "王穗苹 等", description: "出版社：科学出版社<br>出版时间：2023"},
-{ title: "现代汉语语句系统的逻辑语义学研究", author: "刘海燕", description: "出版社：人民出版社<br>出版时间：2023"},
-{ title: "汉语史讲义", author: "汪维辉", description: "出版社：高等教育出版社<br>出版时间：2023"},
-{ title: "汉语音韵研究教程（增订版）", author: "刘晓南", description: "出版社：上海教育出版社<br>出版时间：2023"},
-{ title: "助词“了”", author: "邵洪亮", description: "出版社：北京语言大学出版社<br>胡建锋 主编<br>出版时间：2023"},
-{ title: "近代汉语分析型致使结构及相关句式研究", author: "刘海波", description: "出版社：社会科学文献出版社<br>出版时间：2023"},
-{ title: "变化无穷的语言：认知 、大脑与演化", author: "王士元", description:"《语言、演化与大脑》的增订本<br>出版社：商务印书馆<br>出版时间：2023"},
-{ title: "计算语言学方法研究", author: "冯志伟", description: "<br> 出版社：上海外语教育出版社<br>出版时间：2023"},
-{ title: "语音类型", author: "伊恩·麦迪逊", description: "译者：金俊淑 郑鲜日<br> 出版社：商务印书馆<br>出版时间：2023"},
-{ title: "直觉与自由：实验语言哲学的批判性研究", author: "梅剑华", description: "出版社：商务印书馆<br>出版时间：2023"},
-{ title: "阿拉伯语句法结构研究", author: "叶良英", description: "出版社：北京师范大学出版集团<br>出版时间：2023"},
-{ title: "意识的神经科学原理", author: "", description: "汪云九 崔翯 编著<br>出版社：浙江教育出版社<br>出版时间：2023"},
-{ title: "《逻辑哲学论》研究", author: "韩林合", description: "出版社：商务印书馆<br>出版时间：2023"},
-{ title: "北欧神话学", author: "Paul Hermann", description: "出版社：商周出版社<br>出版时间：2023"},
-{ title: "汉语方言位移表达研究", author: "董淑慧 等", description: "盛益民 柳俊 主编<br> 出版社：中西书局<br>出版时间：2023-08"},
-{ title: "感官奇迹 ：跨越物种的人类感知冒险之旅", author: "Jackie Higgins", description: "译者：王晨<br>出版社：天津科学技术出版社<br>出版时间：2023"},
-{ title: "句法制图理论研究", author: "司富珍", description: "暂无"},
-{ title: "中国语言学年鉴", author: "张伯江", description: "暂无"},
-{ title: '苗语汉借词研究', author: '王艳红', description: '暂无'},
-{title: '类型学视域下的汉日语致使结构的对比研究', author: '李静波', description: '暂无'},
-{title: '汉语新虚词', author: '李宗江 王慧兰', description: '暂无'},
-{title: '陈嘉映著译作品集（18卷）', author: '陈嘉映', description: '《海德格尔哲学概论》<br>《存在与时间》述略<br>《简明语言哲学》<br>《哲学·科学·常识》<br>《说理》<br>《何为良好生活》<br>《少年行》<br>《思远道》<br>《语言深处》<br>《行止于象之间》<br>《个殊者相应和》<br>《穷于为薪》<br>《存在与时间》<br>《哲学研究》<br>《维特根斯坦选读》<br>《哲学中的语言学》<br>《感觉与可感物》<br>《伦理学与哲学的限度》'},
-{title: '言语行为', author: '[美] 约翰•R.塞尔', description: '译者：姜望琪<br>出版社：商务印书馆<br>出版时间：2023-06'},
-{title: '云南兰坪柔弱语', author: '陈海宏', description: '暂无'},
-{title: '叙实性与事实性理论及其应用', author: '李新良 袁毓林等', description: '暂无'},
-{title: '汉语句法学', author: '黄正德 李艳惠 李亚非', description: '暂无'},
-{title: '南部壮语语法研究', author: '吕嵩崧', description: '暂无'},
-{title: '语言的起源和语言相对论', author: '蒋国辉', description: '暂无'},
-{title: '汉语名词形化比较构式的成因及特征分析', author: '李瑛', description: '暂无'},
-{title: '互动视角下的汉语口语语法研究', author: '姚双云 李晓婷', description: '暂无'},
-{title: '心理语言学及语言的神经生物学研究方法实用指导', author: '', description: '暂无'},
-{title: '句法学生成语法导论（原书第四版）', author: 'Andrew Carnie', description: '暂无'},
-{title: '语言的神经生物学手册卷一/卷二', author: '', description: '暂无'},
-{title: '基于认知的自然语言自动形式化研究', author: '徐超', description: '暂无'},
-{title: '计算语言学概论卷一/卷二', author: 'Mohamed Zakaria Kurdi', description: '暂无'},
-{title: '古音三书', author: '威廉·西德尼·阿伦', description: '译者：黄瑞成 <br>《古典拉丁语语音》<br>《古典希腊语语音》<br>《重音与节奏拉丁语和希腊语的韵律特点》'},
-{title: '青岛方言', author: '王建升', description: '暂无'},
-{title: '三都水语语料集萃', author: '代少若 潘建南 石国勐', description: '暂无'},
-{title: '望谟布依语语料集萃', author: '代少若 梁显雁 黄振国', description: '暂无'},
-{title: '鄂南方言的多域声调系统研究', author: '王彩豫', description: '暂无'},
-{title: '二语句法操作的界面研究', author: '尹洪山', description: '暂无'},
-{title: '汉语语法化的历程（增订版）', author: '石毓智', description: '暂无'},
-{title: '语言学为什么重要', author: '薄哲夫', description: '暂无'},
-{title: '语言的深度计算理论与技术应用', author: '王璐璐 袁毓林', description: '暂无'},
-{title: '上海话动词短语的句法研究', author: '朱佳蕾', description: '暂无'},
-{title: '海南澄迈方言研究', author: '张惠英 冯冬梅 吴正伟', description: '暂无'},
-{title: '莱阳方言调查研究', author: '宫钦第、栾瑞波', description: '暂无'},
-{title: '山西方言语法研究', author: '史秀菊', description: '暂无'},
-{title: '焦点结构和意义的研究（增订本）', author: '徐烈炯 潘海华', description: '暂无'},
-{title: '实验语音学实践入门', author: '凌锋', description: '暂无'},
-{title: '普通话语音实验录', author: '石锋', description: '暂无'},
+{title: "焦点与量化理论及其运用", author: "黄瓒辉", description: "出版状态：未出版 <br>ISBN:"},
+{title: "名词性短语的生成语法研究", author: "龚锐", description: "出版状态：未出版 <br>ISBN:"},
+{title: "语篇语义学", author: "蒋严", description: "出版状态：未出版 <br>ISBN:"},
+{title: "跨语言语义学", author: "沈园", description: "出版状态：未出版 <br>ISBN:"},
+{title: "轻动词研究", author: "冯胜利", description: "出版状态：未出版 <br>ISBN:"},
+{title: "手语音系研究", author: "邓慧兰", description: "出版状态：未出版 <br>ISBN:"},
+{title: "优选论：从并行模式到串行模式", author: "马秋武", description: "出版状态：未出版 <br>ISBN:"},
+{title: "韵律音系学", author: "朱立刚 马秋武", description: "出版状态：未出版 <br>ISBN:"},
+{title: "节律音系学", author: "宫齐", description: "出版状态：未出版 <br>ISBN:"},
+{title: "声调研究", author: "朱磊", description: "出版状态：未出版 <br>ISBN:"},
+{title: "辅音研究", author: "凌锋", description: "出版状态：未出版 <br>ISBN:"},
+{title: "元音研究", author: "胡方", description: "<br>ISBN:"},
+{title: "语言理解中语义加工的认知和神经机制", author: "王穗苹 等", description: "出版社：科学出版社<br>出版时间：2023<br>ISBN: 9787030750204"},
+{title: "现代汉语语句系统的逻辑语义学研究", author: "刘海燕", description: "出版社：人民出版社<br>出版时间：2023<br>ISBN: 7010228663"},
+{title: "汉语史讲义", author: "汪维辉", description: "出版社：高等教育出版社<br>出版时间：2023<br>ISBN: 9787040602227"},
+{title: "汉语音韵研究教程（增订版）", author: "刘晓南", description: "第一版出版于2007-01<br>出版社：上海教育出版社<br>出版时间：2023<br>ISBN: 9787572020834"},
+{title: "助词“了”", author: "邵洪亮", description: "出版社：北京语言大学出版社<br>胡建锋 主编<br>出版时间：2023<br>ISBN: 9787561962756"},
+{title: "近代汉语分析型致使结构及相关句式研究", author: "刘海波", description: "出版社：社会科学文献出版社<br>出版时间：2023<br>ISBN: 9787522817187"},
+{title: "变化无穷的语言：认知 、大脑与演化", author: "王士元", description:"《语言、演化与大脑》的增订本<br>出版社：商务印书馆<br>出版时间：2023<br>ISBN: 9787100225069"},
+{title: "计算语言学方法研究", author: "冯志伟", description: "<br> 出版社：上海外语教育出版社<br>出版时间：2023<br>ISBN: 9787544669245"},
+{title: "语音类型", author: "伊恩·麦迪逊", description: "译者：金俊淑 郑鲜日<br> 出版社：商务印书馆<br>出版时间：2023<br>ISBN:"},
+{title: "直觉与自由：实验语言哲学的批判性研究", author: "梅剑华", description: "出版社：商务印书馆<br>出版时间：2023<br>ISBN:"},
+{title: "阿拉伯语句法结构研究", author: "叶良英", description: "出版社：北京师范大学出版集团<br>出版时间：2023<br>ISBN:"},
+{title: "意识的神经科学原理", author: "", description: "汪云九 崔翯 编著<br>出版社：浙江教育出版社<br>出版时间：2023<br>ISBN:"},
+{title: "《逻辑哲学论》研究", author: "韩林合", description: "出版社：商务印书馆<br>出版时间：2023<br>ISBN:"},
+{title: "北欧神话学", author: "Paul Hermann", description: "出版社：商周出版社<br>出版时间：2023<br>ISBN:"},
+{title: "汉语方言位移表达研究", author: "董淑慧 等", description: "盛益民 柳俊 主编<br> 出版社：中西书局<br>出版时间：2023-08<br>ISBN:"},
+{title: "感官奇迹 ：跨越物种的人类感知冒险之旅", author: "Jackie Higgins", description: "译者：王晨<br>出版社：天津科学技术出版社<br>出版时间：2023<br>ISBN:"},
+{title: "句法制图理论研究", author: "司富珍", description: "出版社：外语教学与研究出版社<br>ISBN:"},
+{title: "中国语言学年鉴", author: "张伯江", description: "暂无<br>ISBN:"},
+{title: '苗语汉借词研究', author: '王艳红', description: '暂无<br>ISBN:'},
+{title: '类型学视域下的汉日语致使结构的对比研究', author: '李静波', description: '暂无<br>ISBN:'},
+{title: '汉语新虚词', author: '李宗江 王慧兰', description: '暂无<br>ISBN:'},
+{title: '陈嘉映著译作品集（18卷）', author: '陈嘉映', description: '《海德格尔哲学概论》 ISBN:<br>《存在与时间》述略 ISBN:<br>《简明语言哲学》 ISBN:<br>《哲学·科学·常识》 ISBN:<br>《说理》 ISBN:<br>《何为良好生活》 ISBN:<br>《少年行》 ISBN:<br>《思远道》 ISBN:<br>《语言深处》 ISBN:<br>《行止于象之间》 ISBN:<br>《个殊者相应和》 ISBN:<br>《穷于为薪》 ISBN:<br>《存在与时间》 ISBN:<br>《哲学研究》 ISBN:<br>《维特根斯坦选读》 ISBN:<br>《哲学中的语言学》 ISBN:<br>《感觉与可感物》 ISBN:<br>《伦理学与哲学的限度》 ISBN:'},
+{title: '言语行为', author: '[美] 约翰•R.塞尔', description: '译者：姜望琪<br>出版社：商务印书馆<br>出版时间：2023-06<br>ISBN:'},
+{title: '云南兰坪柔弱语', author: '陈海宏', description: '暂无<br>ISBN:'},
+{title: '叙实性与事实性理论及其应用', author: '李新良 袁毓林等', description: '暂无<br>ISBN:'},
+{title: '汉语句法学', author: '黄正德 李艳惠 李亚非', description: '暂无<br>ISBN:'},
+{title: '南部壮语语法研究', author: '吕嵩崧', description: '暂无<br>ISBN:'},
+{title: '语言的起源和语言相对论', author: '蒋国辉', description: '暂无<br>ISBN:'},
+{title: '汉语名词形化比较构式的成因及特征分析', author: '李瑛', description: '暂无<br>ISBN:'},
+{title: '互动视角下的汉语口语语法研究', author: '姚双云 李晓婷', description: '暂无<br>ISBN:'},
+{title: '心理语言学及语言的神经生物学研究方法实用指导', author: '', description: '暂无<br>ISBN:'},
+{title: '句法学生成语法导论（原书第四版）', author: 'Andrew Carnie', description: '暂无<br>ISBN:'},
+{title: '语言的神经生物学手册卷一/卷二', author: '', description: '暂无<br>ISBN:'},
+{title: '基于认知的自然语言自动形式化研究', author: '徐超', description: '暂无<br>ISBN:'},
+{title: '计算语言学概论卷一/卷二', author: 'Mohamed Zakaria Kurdi', description: '暂无<br>ISBN:'},
+{title: '古音三书', author: '威廉·西德尼·阿伦', description: '译者：黄瑞成 <br>《古典拉丁语语音》 ISBN:<br>《古典希腊语语音》 ISBN:<br>《重音与节奏拉丁语和希腊语的韵律特点》 ISBN:'},
+{title: '青岛方言', author: '王建升', description: '暂无<br>ISBN:'},
+{title: '三都水语语料集萃', author: '代少若 潘建南 石国勐', description: '暂无<br>ISBN:'},
+{title: '望谟布依语语料集萃', author: '代少若 梁显雁 黄振国', description: '暂无<br>ISBN:'},
+{title: '鄂南方言的多域声调系统研究', author: '王彩豫', description: '暂无<br>ISBN:'},
+{title: '二语句法操作的界面研究', author: '尹洪山', description: '暂无<br>ISBN:'},
+{title: '汉语语法化的历程（增订版）', author: '石毓智', description: '暂无<br>ISBN:'},
+{title: '语言学为什么重要', author: '薄哲夫', description: '暂无<br>ISBN:'},
+{title: '语言的深度计算理论与技术应用', author: '王璐璐 袁毓林', description: '暂无<br>ISBN:'},
+{title: '上海话动词短语的句法研究', author: '朱佳蕾', description: '暂无<br>ISBN:'},
+{title: '海南澄迈方言研究', author: '张惠英 冯冬梅 吴正伟', description: '暂无<br>ISBN:'},
+{title: '莱阳方言调查研究', author: '宫钦第、栾瑞波', description: '暂无<br>ISBN:'},
+{title: '山西方言语法研究', author: '史秀菊', description: '暂无<br>ISBN:'},
+{title: '焦点结构和意义的研究（增订本）', author: '徐烈炯 潘海华', description: '暂无<br>ISBN:'},
+{title: '实验语音学实践入门', author: '凌锋', description: '暂无<br>ISBN:'},
+{title: '普通话语音实验录', author: '石锋', description: '暂无<br>ISBN:'},
 {title: '普通语言学新发展研究', author: '胡旭辉 等', description: '出版社：清华大学出版社<br>出版时间：2023'},
 {title: '形式语言学新发展研究', author: '程工 沈园', description: '出版社：清华大学出版社'},
-{title: '吐火罗语研究导论', author: '季羡林 徐文堪', description: '暂无'},
-{title: '古代汉语句型新探', author: '董治国', description: '暂无'},
-{title: '词基驱动的晋语构词与音系交互模式', author: '王晓培', description: '暂无'},
-{title: '词语法导论', author: '理查德·哈德森', description: '暂无'},
-{title: '句法构词的理论与实践', author: '程工', description: '暂无'},
-{title: '作格与汉语语法', author: '罗天华', description: '暂无'},
-{title: '汉语焦点构式中的系词', author: '金大卫 陈珺', description: '暂无'},
-{title: '儿童语言障碍干预', author: '梁丹丹', description: '暂无'},
-{title: '人生初年', author: '李宇明', description: '暂无'},
-{title: '婴幼儿音位范畴习得的神经网络建模研究', author: '曹梦雪', description: '暂无'},
-{title: '扩展投射原则与现代汉语的EPP效应', author: '李建波', description: '暂无'},
+{title: '吐火罗语研究导论', author: '季羡林 徐文堪', description: '暂无<br>ISBN:'},
+{title: '古代汉语句型新探', author: '董治国', description: '暂无<br>ISBN:'},
+{title: '词基驱动的晋语构词与音系交互模式', author: '王晓培', description: '暂无<br>ISBN:'},
+{title: '词语法导论', author: '理查德·哈德森', description: '暂无<br>ISBN:'},
+{title: '句法构词的理论与实践', author: '程工', description: '暂无<br>ISBN:'},
+{title: '作格与汉语语法', author: '罗天华', description: '暂无<br>ISBN:'},
+{title: '汉语焦点构式中的系词', author: '金大卫 陈珺', description: '暂无<br>ISBN:'},
+{title: '儿童语言障碍干预', author: '梁丹丹', description: '暂无<br>ISBN:'},
+{title: '人生初年', author: '李宇明', description: '暂无<br>ISBN:'},
+{title: '婴幼儿音位范畴习得的神经网络建模研究', author: '曹梦雪', description: '暂无<br>ISBN:'},
+{title: '扩展投射原则与现代汉语的EPP效应', author: '李建波', description: '暂无<br>ISBN:'},
 {title: '语调音系学', author: 'Robert Ladd', description: '译者：马秋武'},
 {title: '音系与句法', author: 'Elizabeth Selkirk', description: '译者：马秋武'},
 {title: '语言知识', author: 'Noam Chomsky', description: '译者：李京廉'},
 {title: '理解最简主义', author: '诺伯特·霍恩斯坦 杰罗·努内斯 克莱安西斯·K·格罗曼', description: '译者：熊建国、杨大然'},
-{title: '现代汉语状位形容词的事件语义分析', author: '安丰科', description: '暂无'},
-{title: '现代汉语领属关系的形式语义分析', author: '安胜昔', description: '暂无'},
-{title: '作舟篇-基于西方原典的学术史追溯', author: '李葆嘉', description: '暂无'},
-{title: '尘封的比较语言学史  终结琼斯神话', author: '李葆嘉', description: '暂无'},
-{title: '计量语言学导论', author: '刘海涛', description: '暂无'},
-{title: '计量语言学研究进展', author: '刘海涛', description: '暂无'},
-{title: '词汇与句法计量研究', author: '黄伟等', description: '暂无'},
-{title: '自然语言框架计算', author: '', description: '暂无'},
-{title: '现代维吾尔语动态腭位研究', author: '凯丽比努·阿不都热合曼 王建斌', description: '暂无'},
-{title: '克木语四音格研究', author: '刘锡瑞', description: '暂无'},
-{title: '内蒙古敖鲁古雅鄂温克语', author: '乌日格喜乐图', description: '暂无'},
-{title: '壮语金龙岱话参考语法', author: '李胜兰', description: '暂无'},
-{title: '哈萨克语语音和谐发音机制研究', author: '辛锐青', description: '暂无'},
-{title: '苗瑶语语音的类型学研究', author: '谭晓平', description: '暂无'},
-{title: '汉语方言范畴研究丛书', author: '', description: '暂无'},
-{title: '现代汉语全称量化词研究', author: '张蕾', description: '暂无'},
-{title: '红河上游傣雅语', author: '邢公畹', description: '暂无'},
-{title: '三江侗语', author: '邢公畹', description: '暂无'},
-{title: '布依语副词研究', author: '陈娥', description: '暂无'},
-{ title: '卡尔梅克语·土尔扈特土语研究（蒙文）', author: '秀花', description: '暂无' },
-{ title: '中国语言文化典藏·甘肃东乡唐汪话', author: '冉启斌 徐丹', description: '暂无' },
-{ title: '中国语言文化典藏·澜沧拉祜语', author: '刘劲荣 张琪 何根源 刘航宇', description: '暂无' },
-{ title: '中国语言文化典藏·普格彝语', author: '刘正发 杰觉伊泓', description: '暂无' },
-{ title: '中国语言文化典藏·西林壮语', author: '李锦芳 梁汉昌', description: '暂无' },
-{ title: '中国语言文化典藏·花垣苗语', author: '刘宝俊', description: '暂无' },
-{ title: '中国语言文化典藏·和龙朝鲜语', author: '黄玉花', description: '暂无' },
-{ title: '中国语言文化典藏·互助土族语', author: '韩国君 乔志良 奈日斯格 太平 超日雅', description: '暂无' },
-{ title: '中国语言文化典藏·三江侗语', author: '何彦城', description: '暂无' },
-{ title: '中国语言文化典藏·景洪傣语', author: '保明所 玉腊光罕 岩温罕 希利补发', description: '暂无' },
-{ title: '中国语言文化典藏·新源哈萨克语', author: '张定京 吴迪 叶里肯不拉·叶力努', description: '暂无' },
-{ title: '中国语言文化典藏·龙山土家语', author: '田洋 李启群 张旭', description: '暂无' },
-{ title: '敦煌变文语法研究', author: '吴福祥', description: '暂无' },
-{title: '依存关系与语言网络', author: '刘海涛', description: '暂无'},
-{title: '词汇与句法计量研究', author: '黄伟 等', description: '暂无'},
-{title: '类型学视角下汉语违实范畴研究', author: '雍茜', description: '暂无'},
-{title: '历史比较语言学', author: '陈忠敏', description: '暂无'},
-{title: '汉语中古音研究', author: '马德强', description: '暂无'},
-{title: '汉藏历史比较语言学研究', author: '杨光荣', description: '暂无'},
-{title: '闽南方言的历史比较及语音构拟', author: '张静芬', description: '暂无'},
-{title: '汉语方言论集', author: '王福堂', description: '暂无'},
-{title: '汉语量词加工的神经机制', author: '杨瑛', description: '暂无'},
-{title: '壮语金龙岱话参考语法', author: '李胜兰', description: '暂无'},
-{title: '梳毛、八卦及语言的进化', author: '', description: '暂无'},
-{title: '中国民族语言语法标注文本丛书', author: '', description: '暂无'},
-{title: '元音与辅音（第三版）', author: '彼得·赖福吉', description: '暂无'},
-{title: '方言比较与吴语史研究', author: '陶寰 盛益民 黄河', description: '暂无'},
-{title: '语言和言语问题研究', author: '范晓', description: '暂无'},
-{title: '基于词义基因的汉语起源弱任意观研究', author: '李为政', description: '暂无'},
-{title: '汉语语法演化史', author: '石毓智', description: '暂无'},
-{title: '近代汉语象声词研究', author: '赵爱武', description: '暂无'},
-{title: '语言学研究的多元视野 ', author: '邵敬敏 冯胜利 杨凯荣 杉树博文', description: '暂无'},
-{title: '东莞方言调查报告', author: '姚琼姿 刘燕婷 邓秋玲 庄初升等', description: '暂无'},
+{title: '现代汉语状位形容词的事件语义分析', author: '安丰科', description: '暂无<br>ISBN:'},
+{title: '现代汉语领属关系的形式语义分析', author: '安胜昔', description: '暂无<br>ISBN:'},
+{title: '作舟篇-基于西方原典的学术史追溯', author: '李葆嘉', description: '暂无<br>ISBN:'},
+{title: '尘封的比较语言学史  终结琼斯神话', author: '李葆嘉', description: '暂无<br>ISBN:'},
+{title: '计量语言学导论', author: '刘海涛', description: '暂无<br>ISBN:'},
+{title: '计量语言学研究进展', author: '刘海涛', description: '暂无<br>ISBN:'},
+{title: '词汇与句法计量研究', author: '黄伟等', description: '暂无<br>ISBN:'},
+{title: '自然语言框架计算', author: '', description: '暂无<br>ISBN:'},
+{title: '现代维吾尔语动态腭位研究', author: '凯丽比努·阿不都热合曼 王建斌', description: '暂无<br>ISBN:'},
+{title: '克木语四音格研究', author: '刘锡瑞', description: '暂无<br>ISBN:'},
+{title: '内蒙古敖鲁古雅鄂温克语', author: '乌日格喜乐图', description: '暂无<br>ISBN:'},
+{title: '壮语金龙岱话参考语法', author: '李胜兰', description: '暂无<br>ISBN:'},
+{title: '哈萨克语语音和谐发音机制研究', author: '辛锐青', description: '暂无<br>ISBN:'},
+{title: '苗瑶语语音的类型学研究', author: '谭晓平', description: '暂无<br>ISBN:'},
+{title: '汉语方言范畴研究丛书', author: '', description: '暂无<br>ISBN:'},
+{title: '现代汉语全称量化词研究', author: '张蕾', description: '暂无<br>ISBN:'},
+{title: '红河上游傣雅语', author: '邢公畹', description: '暂无<br>ISBN:'},
+{title: '三江侗语', author: '邢公畹', description: '暂无<br>ISBN:'},
+{title: '布依语副词研究', author: '陈娥', description: '暂无<br>ISBN:'},
+{title: '卡尔梅克语·土尔扈特土语研究（蒙文）', author: '秀花', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·甘肃东乡唐汪话', author: '冉启斌 徐丹', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·澜沧拉祜语', author: '刘劲荣 张琪 何根源 刘航宇', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·普格彝语', author: '刘正发 杰觉伊泓', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·西林壮语', author: '李锦芳 梁汉昌', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·花垣苗语', author: '刘宝俊', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·和龙朝鲜语', author: '黄玉花', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·互助土族语', author: '韩国君 乔志良 奈日斯格 太平 超日雅', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·三江侗语', author: '何彦城', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·景洪傣语', author: '保明所 玉腊光罕 岩温罕 希利补发', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·新源哈萨克语', author: '张定京 吴迪 叶里肯不拉·叶力努', description: '暂无<br>ISBN:' },
+{title: '中国语言文化典藏·龙山土家语', author: '田洋 李启群 张旭', description: '暂无<br>ISBN:' },
+{title: '敦煌变文语法研究', author: '吴福祥', description: '暂无<br>ISBN:' },
+{title: '依存关系与语言网络', author: '刘海涛', description: '暂无<br>ISBN:'},
+{title: '词汇与句法计量研究', author: '黄伟 等', description: '暂无<br>ISBN:'},
+{title: '类型学视角下汉语违实范畴研究', author: '雍茜', description: '暂无<br>ISBN:'},
+{title: '历史比较语言学', author: '陈忠敏', description: '暂无<br>ISBN:'},
+{title: '汉语中古音研究', author: '马德强', description: '暂无<br>ISBN:'},
+{title: '汉藏历史比较语言学研究', author: '杨光荣', description: '暂无<br>ISBN:'},
+{title: '闽南方言的历史比较及语音构拟', author: '张静芬', description: '暂无<br>ISBN:'},
+{title: '汉语方言论集', author: '王福堂', description: '暂无<br>ISBN:'},
+{title: '汉语量词加工的神经机制', author: '杨瑛', description: '暂无<br>ISBN:'},
+{title: '壮语金龙岱话参考语法', author: '李胜兰', description: '暂无<br>ISBN:'},
+{title: '梳毛、八卦及语言的进化', author: '', description: '暂无<br>ISBN:'},
+{title: '中国民族语言语法标注文本丛书', author: '', description: '暂无<br>ISBN:'},
+{title: '元音与辅音（第三版）', author: '彼得·赖福吉', description: '暂无<br>ISBN:'},
+{title: '方言比较与吴语史研究', author: '陶寰 盛益民 黄河', description: '暂无<br>ISBN:'},
+{title: '语言和言语问题研究', author: '范晓', description: '暂无<br>ISBN:'},
+{title: '基于词义基因的汉语起源弱任意观研究', author: '李为政', description: '暂无<br>ISBN:'},
+{title: '汉语语法演化史', author: '石毓智', description: '暂无<br>ISBN:'},
+{title: '近代汉语象声词研究', author: '赵爱武', description: '暂无<br>ISBN:'},
+{title: '语言学研究的多元视野 ', author: '邵敬敏 冯胜利 杨凯荣 杉树博文', description: '暂无<br>ISBN:'},
+{title: '东莞方言调查报告', author: '姚琼姿 刘燕婷 邓秋玲 庄初升等', description: '暂无<br>ISBN:'},
         // 添加更多书籍信息
     ];
 
     // 获取书架容器
     const bookshelf = document.getElementById("bookshelf");
 
-    // 动态生成书籍元素并添加到书架容器中
-    books.forEach(book => {
+// 动态生成书籍元素并添加到书架容器中
+books.forEach(book => {
     const bookElement = document.createElement("div");
     bookElement.className = "book";
+
+    // 检查书籍的出版状态，默认为已出版
+    let isPublished = true;
+
+    if (book.description) {
+        // 使用正则表达式匹配出版状态
+        const statusMatch = book.description.match(/出版状态：\s*(未出版|即将出版|已出版)/i);
+        if (statusMatch) {
+            const status = statusMatch[1].trim(); // 获取出版状态的值并去除前后空格
+            if (status === "未出版" || status === "即将出版") {
+                isPublished = false; // 未出版或即将出版状态
+            }
+        }
+    }
 
     // 创建带颜色的文本框作为书脊
     const spineElement = document.createElement("div");
@@ -363,21 +416,32 @@
     spineElement.style.backgroundPosition = "center";
     spineElement.style.backgroundRepeat = "no-repeat";
 
-    // 设置文本框中的文字颜色为（）色
-    spineElement.style.color = "#000000"; // （）色
-	spineElement.style.fontWeight = "bold"; // 文字粗体
-	
-	// 设置书脊的宽度和高度（根据需要调整）
+    // 设置文本框中的文字颜色为黑色或灰色（根据出版状态）
+    if (isPublished) {
+        spineElement.style.color = "#000000"; // 黑色
+    } else {
+        spineElement.style.color = "#999999"; // 灰色
+    }
+    spineElement.style.fontWeight = "bold"; // 文字粗体
+
+    // 设置书脊的宽度和高度（根据需要调整）
     spineElement.style.width = "40px"; // 调整宽度
     spineElement.style.height = "150px"; // 调整高度
-	
-	// 创建书籍标题元素
+
+    // 如果书籍未出版，添加闪烁的小绿点
+    if (!isPublished) {
+        const dotElement = document.createElement("div");
+        dotElement.classList.add("unpublished-dot"); // 添加CSS类以进行样式
+        spineElement.appendChild(dotElement);
+    }
+
+    // 创建书籍标题元素
     const titleElement = document.createElement("p");
     const maxTitleLength = 11; // 设置最大标题长度
     if (book.title.length <= maxTitleLength) {
         titleElement.textContent = book.title;
     } else {
-    titleElement.textContent = book.title.substring(0, maxTitleLength) + "...";
+        titleElement.textContent = book.title.substring(0, maxTitleLength) + "...";
     }
 
     // 将标题添加到文本框中
@@ -385,9 +449,6 @@
 
     // 将文本框添加到书籍元素
     bookElement.appendChild(spineElement);
-
-
-    let isBookInfoVisible = false;
 
     // 添加点击事件以显示/隐藏详细信息
     spineElement.addEventListener("click", (event) => {
@@ -409,39 +470,51 @@
     bookshelf.appendChild(bookElement);
     });
 
-    // 点击页面其他部分以关闭书籍信息模态框
-    window.addEventListener("click", () => {
-    hideBookInfo();
-    });
+		// 点击页面其他部分以关闭书籍信息模态框
+		window.addEventListener("click", () => {
+		hideBookInfo();
+		});
 
-    // 显示书籍详细信息
-    function showBookInfo(book) {
+		// 用于跟踪详细信息框的显示状态
+	let isBookInfoVisible = false;
+
+	// 显示书籍详细信息
+	function showBookInfo(book) {
     const modal = document.getElementById("bookInfoModal");
     // 使用 book 对象中的信息填充模态框
     // 可以添加更多详细信息，如作者、描述等
     modal.innerHTML = `
         <h2>${book.title}</h2>
         <p>作者: ${book.author}</p>		
-        <p>${book.description}</p>`;
+        <p>${book.description}</p>
+    `;
     modal.style.display = "block";
 
-    // 添加点击模态框以关闭事件
-    modal.addEventListener("click", () => {
-        modal.style.display = "none";
+    // 阻止模态框内文本点击事件冒泡
+    modal.addEventListener("click", (event) => {
+        event.stopPropagation();
     });
 
     // 设置封面图片的样式
     const modalCoverImage = document.getElementById("modalCoverImage");
     modalCoverImage.style.maxWidth = "200px"; // 设置最大宽度
     modalCoverImage.style.maxHeight = "300px"; // 设置最大高度
-    }
- 
+	}
 
-    // 隐藏书籍详细信息
-    function hideBookInfo() {
-    const modal = document.getElementById("bookInfoModal");
-    modal.style.display = "none";
-    }
+	// 隐藏书籍详细信息
+	function hideBookInfo() {
+		const modal = document.getElementById("bookInfoModal");
+		modal.style.display = "none";
+	}
+
+
+	// 在文档点击事件中检测详细信息框的显示状态
+	window.addEventListener("click", (event) => {
+		// 如果用户选择了文本，不要关闭详细信息框
+		if (isBookInfoVisible && window.getSelection().toString() === "") {
+			hideBookInfo();
+		}
+	});
 
 
     // 生成随机颜色
@@ -453,29 +526,29 @@
         }
         return color;
     }
-// 获取搜索按钮元素
-const searchButton = document.getElementById("searchButton");
+	// 获取搜索按钮元素
+	const searchButton = document.getElementById("searchButton");
 
-// 获取搜索结果容器元素
-const searchResultsContainer = document.getElementById("searchResults");
+	// 获取搜索结果容器元素
+	const searchResultsContainer = document.getElementById("searchResults");
 
-// 添加点击事件处理程序
-searchButton.addEventListener("click", () => {
-    performSearch();
-});
+	// 添加点击事件处理程序
+	searchButton.addEventListener("click", () => {
+		performSearch();
+	});
 
-// 或者你也可以监听回车键来执行搜索
-const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-        performSearch();
-    }
-});
+	// 或者你也可以监听回车键来执行搜索
+	const searchInput = document.getElementById("searchInput");
+	searchInput.addEventListener("keypress", (event) => {
+		if (event.key === "Enter") {
+			performSearch();
+		}
+	});
 
-// 执行搜索操作的函数
-function performSearch() {
-    const query = searchInput.value.toLowerCase();
-    const results = [];
+	// 执行搜索操作的函数
+	function performSearch() {
+		const query = searchInput.value.toLowerCase();
+		const results = [];
 
     if (query.trim() === "") {
         // 如果搜索框没有内容，清空搜索结果容器并返回初始界面
@@ -490,11 +563,9 @@ function performSearch() {
     });
 
     displaySearchResults(results);
-}
+    }
 
-
-// 显示搜索结果的函数
-function displaySearchResults(results) {
+    function displaySearchResults(results) {
     // 获取搜索结果容器元素
     const searchResultsContainer = document.getElementById("searchResults");
 
@@ -511,11 +582,17 @@ function displaySearchResults(results) {
 
             // 创建书籍标题元素
             const titleElement = document.createElement("p");
-            titleElement.textContent = book.title;
+            // 使用正则表达式移除标题中的<br>标签
+            const titleText = book.title.replace(/<br>/g, " ");
+            titleElement.innerHTML = titleText;
+            // 添加加粗样式
+            titleElement.style.fontWeight = "bold";
 
             // 创建书籍详细信息元素
             const detailsElement = document.createElement("p");
-            detailsElement.textContent = `作者: ${book.author}, 描述: ${book.description}`;
+            // 使用正则表达式移除描述中的<br>标签
+            const descriptionText = book.description.replace(/<br>/g, " ");
+            detailsElement.innerHTML = `作者: ${book.author}, 描述: ${descriptionText}`;
 
             bookElement.appendChild(titleElement);
             bookElement.appendChild(detailsElement);
@@ -526,9 +603,6 @@ function displaySearchResults(results) {
     // 设置米黄色背景
     searchResultsContainer.style.backgroundColor = "#F5DEB3";
 }
-
-
-
 </script>
 </body>
 </html>
