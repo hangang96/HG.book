@@ -39,36 +39,54 @@
         }
 
         /* 样式化书籍元素 */
-        .book {
-            width: 40px;
-            padding: 10px;
-            text-align: center;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-			
-        }
+		.book {
+			width: 40px;
+			padding: 10px;
+			text-align: center;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			transition: transform 0.2s, box-shadow 0.2s;
+			cursor: pointer;
+			border-radius: 10px; /* 添加圆角边框 */
+		}
 
-        .book:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
+				.book:hover {
+					transform: scale(1.05);
+					box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+				}
 
-        /* 样式化书籍标题 */
-        .book p {
-            font-size: 16px;
-            margin: 10px 0;
-        }
+		   /* 样式化书籍标题 */
+		.book p {
+			font-size: 16px;
+			margin: 10px 0;
+		}
 
-        /* 样式化书籍封面 */
-        .book img {
-            max-width: 100%;
-            max-height: 200px;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        }
+		/* 样式化书脊 */
+		.spine-textbox {
+			background-color: #FFDEAD; /* 设置书脊背景颜色为金黄色 */
+			color: #8b4513; /* 设置文本颜色为褐金色 */
+			font-weight: bold;
+			width: 40px;
+			height: 150px;
+			border-radius: 10px; /* 添加圆角边框 */
+			position: relative; /* 使纹理定位相对于书脊 */
+			overflow: hidden; /* 隐藏超出边界的纹理 */
+		}
+
+		/* 添加纹理样式 */
+		.spine-textbox::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: repeating-linear-gradient(45deg, transparent, transparent 5px, #8b4513 5px, #8b4513 10px); /* 添加斜线纹理 */
+			z-index: -1; /* 将纹理放在书脊背后 */
+		}
+
+     
 
         /* 模态框样式 */
         #bookInfoModal {
@@ -210,7 +228,7 @@
 { title: "现代汉语语句系统的逻辑语义学研究", author: "刘海燕", description: "出版社：人民出版社<br>出版时间：2023"},
 { title: "汉语史讲义", author: "汪维辉", description: "出版社：高等教育出版社<br>出版时间：2023"},
 { title: "汉语音韵研究教程（增订版）", author: "刘晓南", description: "出版社：上海教育出版社<br>出版时间：2023"},
-{ title: "助词”了“", author: "邵洪亮", description: "出版社：北京语言大学出版社<br>胡建锋 主编<br>出版时间：2023"},
+{ title: "助词“了”", author: "邵洪亮", description: "出版社：北京语言大学出版社<br>胡建锋 主编<br>出版时间：2023"},
 { title: "近代汉语分析型致使结构及相关句式研究", author: "刘海波", description: "出版社：社会科学文献出版社<br>出版时间：2023"},
 { title: "变化无穷的语言：认知 、大脑与演化", author: "王士元", description:"《语言、演化与大脑》的增订本<br>出版社：商务印书馆<br>出版时间：2023"},
 { title: "计算语言学方法研究", author: "冯志伟", description: "<br> 出版社：上海外语教育出版社<br>出版时间：2023"},
@@ -227,8 +245,8 @@
 { title: '苗语汉借词研究', author: '王艳红', description: '暂无'},
 {title: '类型学视域下的汉日语致使结构的对比研究', author: '李静波', description: '暂无'},
 {title: '汉语新虚词', author: '李宗江 王慧兰', description: '暂无'},
-{title: '陈嘉映著译作品集（18卷）', author: '陈嘉映', description: '暂无'},
-{title: '言语行为', author: '姜望琪', description: '暂无'},
+{title: '陈嘉映著译作品集（18卷）', author: '陈嘉映', description: '《海德格尔哲学概论》<br>《存在与时间》述略<br>《简明语言哲学》<br>《哲学·科学·常识》<br>《说理》<br>《何为良好生活》<br>《少年行》<br>《思远道》<br>《语言深处》<br>《行止于象之间》<br>《个殊者相应和》<br>《穷于为薪》<br>《存在与时间》<br>《哲学研究》<br>《维特根斯坦选读》<br>《哲学中的语言学》<br>《感觉与可感物》<br>《伦理学与哲学的限度》'},
+{title: '言语行为', author: '[美] 约翰•R.塞尔', description: '译者：姜望琪<br>出版社：商务印书馆<br>出版时间：2023-06'},
 {title: '云南兰坪柔弱语', author: '陈海宏', description: '暂无'},
 {title: '叙实性与事实性理论及其应用', author: '李新良 袁毓林等', description: '暂无'},
 {title: '汉语句法学', author: '黄正德 李艳惠 李亚非', description: '暂无'},
@@ -241,9 +259,7 @@
 {title: '语言的神经生物学手册卷一/卷二', author: '', description: '暂无'},
 {title: '基于认知的自然语言自动形式化研究', author: '徐超', description: '暂无'},
 {title: '计算语言学概论卷一/卷二', author: 'Mohamed Zakaria Kurdi', description: '暂无'},
-{title: '古典拉丁语语音', author: '威廉·西德尼·阿伦 黄瑞成', description: '暂无'},
-{title: '古典希腊语语音', author: '', description: '暂无'},
-{title: '重音与节奏拉丁语和希腊语的韵律特点', author: '', description: '暂无'},
+{title: '古音三书', author: '威廉·西德尼·阿伦', description: '译者：黄瑞成 <br>《古典拉丁语语音》<br>《古典希腊语语音》<br>《重音与节奏拉丁语和希腊语的韵律特点》'},
 {title: '青岛方言', author: '王建升', description: '暂无'},
 {title: '三都水语语料集萃', author: '代少若 潘建南 石国勐', description: '暂无'},
 {title: '望谟布依语语料集萃', author: '代少若 梁显雁 黄振国', description: '暂无'},
