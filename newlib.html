@@ -99,7 +99,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 20px;
-            background-color: #fff;
+            background: linear-gradient(to left, #E6E6FA, #FFF0F5, #FFE4E1, #F0FFFF); /* 书脊色渐变 */
             border: 1px solid #ddd;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             z-index: 999;
@@ -504,7 +504,8 @@
         <p>作者: ${book.author}</p>		
         <p>${book.description}</p>`;
     
-	
+	 // 缓慢渐显效果
+    fadeIn(modal);
 	
 	modal.style.display = "block";
 
@@ -533,6 +534,25 @@
 			hideBookInfo();
 		}
 	});
+     	// 渐显效果函数
+	function fadeIn(element) {
+		element.style.display = "block"; // 显示元素
+		element.style.opacity = 0; // 初始透明度为0
+
+		let opacity = 0;
+		const duration = 500; // 渐显时间，单位毫秒
+		const interval = 10; // 更新透明度的时间间隔，单位毫秒
+		const increment = 1 / (duration / interval); // 透明度增量
+
+		const fadeInterval = setInterval(function () {
+			opacity += increment;
+			element.style.opacity = opacity;
+
+			if (opacity >= 1) {
+				clearInterval(fadeInterval); // 渐显完成后停止定时器
+			}
+		}, interval);
+	}
 
 
     // 生成随机颜色
