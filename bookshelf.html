@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新书展架</title>
     <style>
         /* 设置背景颜色为古典的米色 */
@@ -30,14 +31,16 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start; /* 从左侧开始排列 */;
-            gap: 10px;
+            gap: 5px;
             padding: 20px;
-            background-color: #f2f2f2;
+            background: linear-gradient(to bottom, #334d5c, #6497b1, #334d5c); /* 蓝色渐变 */
             border: 2px solid #ccc;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 			margin: 20px; /* 添加外边距，离页面边缘有一些距离 */
+			border-radius: 10px; /* 圆角边框 */
 			
         }
+		
 
         /* 样式化书籍元素 */
 		.book {
@@ -97,10 +100,11 @@
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 20px;
-            background-color: #fff;
+            background: linear-gradient(to left, #E6E6FA, #FFF0F5, #FFE4E1, #F0FFFF); /* 书脊色渐变 */
             border: 1px solid #ddd;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             z-index: 999;
+			border-radius: 10px; /* 圆角边框 */
         }
 
         /* 样式化标题 */
@@ -139,7 +143,7 @@
 
         /* 搜索按钮图标样式 */
         #searchButton::before {
-            content: "🔍"; /* 放大镜图标 */
+            content: "👻"; /* 放大镜图标 */
         }
 
         /* 样式化搜索结果容器 */
@@ -229,7 +233,7 @@
 			white-space: nowrap;
 			transform: rotate(180deg); /* 旋转180度以使文字顶部朝左 */
 		}
-		
+
 
     </style>
 </head>
@@ -261,12 +265,24 @@
 <!-- JavaScript 代码 -->
 <script>
     const books = [
-	    {title: "Wilhelm von Humboldt and Early American Linguistics: Resources and Inspirations", author: "Emanuel J. Drechsel", description: "出版社：剑桥大学出版社 <br>出版状态：未出版 <br>ISBN: 9781108966801<br>Expected online publication date:January 2024"},
-	    {title: "The Cambridge Handbook of Gesture Studies", author: "", description: "出版状态：未出版 <br>ISBN: 9781108638869<br>Edited by Alan Cienki<br>Expected online publication date:April 2024"},
-	    {title: "The Cambridge Handbook of Slavic Linguistics", author: "", description: "出版状态：未出版 <br>ISBN: 9781108973021<br>Edited by Danko Šipka, Wayles Browne<br>Expected online publication date:May 2024"},
-		{title: 'A Mind for Language: An Introduction to the Innateness Debate', author: 'Harry van der Hulst', description: '出版状态：未出版<br>ISBN: 9781108456494<br>内容：Explains the theory in an easy-to-read way, without complicated formulas, making it accessible for students without a background in linguistics.<br> Illustrated with real-life examples throughout, making the material engaging.<br> Uses an interdisciplinary approach, in order to examine the topic from multiple angles<br>PUBLICATION PLANNED FOR: September 2023'},
-		{title: "Life and Language Beyond Earth", author: "Raymond Hickey", description: "出版状态：未出版 <br>ISBN: 5555559469822<br>Expected online publication date:September 2023"},
-		{title: "焦点与量化理论及其运用", author: "黄瓒辉", description: "出版状态：未出版 <br>ISBN:"},
+	    {title: "高安方言语法研究", author: "聂有才", description: "出版状态：已出版<br>ISBN:9787522719573<br>出版时间：2023-6"},
+		{title: "汉语方言被动范畴比较研究", author: "贾迪扉", description: "出版状态：已出版<br>ISBN:9787522715438<br>出版时间：2023-6"},
+		{title: "吉安方言语法研究", author: "裴足华", description: "出版状态：已出版<br>ISBN:9787522720524<br>出版时间：2023-6"},
+		{title: "汉语方言处置范畴比较研究", author: "余乐", description: "出版状态：已出版<br>ISBN:9787522713113<br>出版时间：2023-1"},
+		{title: "汉语方言持续体比较研究", author: "罗自群", description: "出版状态：已出版<br>ISBN:9787522711829<br>出版时间：2023-1"},
+		{title: "汉语方言否定范畴比较研究", author: "陈芙", description: "出版状态：已出版<br>ISBN:9787522708706<br>出版时间：2023-1"},
+		{title: "崇阳方言语法研究", author: "祝敏", description: "出版状态：已出版<br>ISBN:9787522706443<br>出版时间：2023-1"},		
+		{title: "浚县方言语法研究", author: "辛永芬", description: "出版状态：已出版<br>ISBN:9787520396332<br>出版时间：2022-9"},
+		{title: "罗田方言语法研究", author: "徐英", description: "出版状态：已出版<br>ISBN:9787520398763<br>出版时间：2022-4"},
+		{title: "武汉方言语法研究（修订版）", author: "赵葵欣", description: "出版状态：已出版<br>ISBN:9787520395564<br>出版时间：2022-3"},
+		{title: "安陆方言语法研究（增订本）", author: "盛银花", description: "出版状态：已出版<br>ISBN:9787520396455<br>出版时间：2022-3"},
+		{title: "丹江方言语法研究", author: "苏俊波", description: "出版状态：已出版<br>ISBN:9787520391368<br>出版时间：2021-10"},
+		{title: "安阳方言语法研究", author: "王芳", description: "出版状态：已出版<br>ISBN:9787520383400<br>出版时间：2021-6"},
+		{title: "汉语方言完成体标记比较研究", author: "王桂亮", description: "出版状态：已出版<br>ISBN:9787520382540<br>出版时间：2021-6"},
+		{title: "汉语量词及其语法化专题研究", author: "李建平", description: "出版状态：已出版<br>ISBN:9787522721835<br>出版时间：2023-6"},
+		{title: "鄂尔浑-叶尼塞碑铭语法标注及动词研究", author: "崔焱", description: "出版状态：已出版<br>ISBN:9787522722887<br>出版时间：2023-6"},
+	    {title: "藏缅语演化网络研究", author: "高天俊", description: "出版状态：已出版<br>ISBN:9787573207531"},
+	    {title: "焦点与量化理论及其运用", author: "黄瓒辉", description: "出版状态：未出版 <br>ISBN:"},
 		{title: "名词性短语的生成语法研究", author: "龚锐", description: "出版状态：未出版 <br>ISBN:"},
 		{title: "语篇语义学", author: "蒋严", description: "出版状态：未出版 <br>ISBN:"},
 		{title: "跨语言语义学", author: "沈园", description: "出版状态：未出版 <br>ISBN:"},
@@ -278,7 +294,6 @@
 		{title: "声调研究", author: "朱磊", description: "出版状态：未出版 <br>ISBN:"},
 		{title: "辅音研究", author: "凌锋", description: "出版状态：未出版 <br>ISBN:"},
 		{title: "元音研究", author: "胡方", description: "出版社：上海外语教育出版社<br>ISBN:9787521320732"},
-		{title: "藏缅语演化网络研究", author: "高天俊", description: "出版状态：已出版<br>ISBN:9787573207531"},
 		{title: "语言理解中语义加工的认知和神经机制", author: "王穗苹 等", description: "出版社：科学出版社<br>出版时间：2023<br>ISBN: 9787030750204"},
 		{title: "现代汉语语句系统的逻辑语义学研究", author: "刘海燕", description: "出版社：人民出版社<br>出版时间：2023<br>ISBN: 7010228663"},
 		{title: "汉语史讲义", author: "汪维辉", description: "出版社：高等教育出版社<br>出版时间：2023<br>ISBN: 9787040602227"},
@@ -380,7 +395,6 @@
 		{title: '中国语言文化典藏·龙山土家语', author: '田洋 李启群 张旭', description: '暂无<br>ISBN:' },
 		{title: '敦煌变文语法研究', author: '吴福祥', description: '暂无<br>ISBN:' },
 		{title: '依存关系与语言网络', author: '刘海涛', description: '暂无<br>ISBN:'},
-		{title: '词汇与句法计量研究', author: '黄伟 等', description: '暂无<br>ISBN:'},
 		{title: '类型学视角下汉语违实范畴研究', author: '雍茜', description: '暂无<br>ISBN:'},
 		{title: '历史比较语言学', author: '陈忠敏', description: '暂无<br>ISBN:'},
 		{title: '汉语中古音研究', author: '马德强', description: '暂无<br>ISBN:'},
@@ -505,10 +519,13 @@
     // 可以添加更多详细信息，如作者、描述等
     modal.innerHTML = `
         <h2>${book.title}</h2>
-        <p>作者: ${book.author}</p>		
+        <p>作者: ${book.author}</p>	
+        <p>编者: ${book.editor}</p>	
+        <p>译者: ${book.translator}</p>			
         <p>${book.description}</p>`;
     
-	
+	 // 缓慢渐显效果
+    fadeIn(modal);
 	
 	modal.style.display = "block";
 
@@ -537,6 +554,25 @@
 			hideBookInfo();
 		}
 	});
+     	// 渐显效果函数
+	function fadeIn(element) {
+		element.style.display = "block"; // 显示元素
+		element.style.opacity = 0; // 初始透明度为0
+
+		let opacity = 0;
+		const duration = 500; // 渐显时间，单位毫秒
+		const interval = 10; // 更新透明度的时间间隔，单位毫秒
+		const increment = 1 / (duration / interval); // 透明度增量
+
+		const fadeInterval = setInterval(function () {
+			opacity += increment;
+			element.style.opacity = opacity;
+
+			if (opacity >= 1) {
+				clearInterval(fadeInterval); // 渐显完成后停止定时器
+			}
+		}, interval);
+	}
 
 
     // 生成随机颜色
@@ -569,8 +605,8 @@
 
 	// 执行搜索操作的函数
 	function performSearch() {
-		const query = searchInput.value.toLowerCase();
-		const results = [];
+    const query = searchInput.value.toLowerCase();
+    const results = [];
 
     if (query.trim() === "") {
         // 如果搜索框没有内容，清空搜索结果容器并返回初始界面
@@ -579,13 +615,17 @@
     }
 
     books.forEach(book => {
-        if (book.title.toLowerCase().includes(query)) {
+        if (
+            book.title.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query) ||
+            book.description.toLowerCase().includes(query)
+        ) {
             results.push(book);
         }
     });
 
     displaySearchResults(results);
-    }
+}
 	
     function displaySearchResults(results) {
     // 获取搜索结果容器元素
@@ -622,8 +662,8 @@
         });
     }
 
-    // 设置米黄色背景
-    searchResultsContainer.style.backgroundColor = "#F5DEB3";
+    // 设置半透明的米黄色背景
+searchResultsContainer.style.backgroundColor = "rgba(255, 255, 240, 0.6)";
 }
 </script>
 </body>
