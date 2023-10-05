@@ -276,12 +276,14 @@
 		{title: "节律音系学", author: "宫齐", description: "出版状态：未出版 <br>ISBN:"},
 		{title: "声调研究", author: "朱磊", description: "出版状态：未出版 <br>ISBN:"},
 		{title: "辅音研究", author: "凌锋", description: "出版状态：未出版 <br>ISBN:"},
+		{title: "语法分析", author: "邓思颖", description: "<br>ISBN:9789620705267<br>出版社：香港商务印书馆<br>出版时间：2023"},
 		{title: "笛卡尔的《第一哲学的沉思》", author: "G·哈特菲尔德",translator:"尚新建",  description: "<br>ISBN:9787559860422<br>出版社：广西师范大学出版社<br>出版时间：2023"},
+		{title: "维特根斯坦的<哲学研究>", author: "M·麦金",translator:"李国山",  description: "<br>ISBN:9787559860835<br>出版社：广西师范大学出版社<br>出版时间：2023"},
 		{title: "索绪尔语言学理论研究", author: "聂志平", description: "<br>ISBN:9787522723853<br>出版社：中国社会科学出版社<br>出版时间：2023"},
 		{title: "歌唱的尼安德特人 语言和音乐的起源", author: "Steven Mithen", translator:"贾丙波 李静 夏君",description: "<br>ISBN:9787308237550<br>出版社：浙江大学出版社<br>出版时间：2023"},
 		{title: "伊犁州额鲁特蒙古语元音声学研究", author: "赵春明", description: " <br>ISBN:9787522810959<br>出版社：社会科学文献出版社<br>出版时间：2023"},
 		{title: "达斡尔语概要", author: "丁石庆 郭玲丽", description: "<br>ISBN:9787522712468<br>出版社：中国社会科学出版社<br>出版时间：2023"},
-		{title: "中国语言资源集：河南(三卷)", author: "辛永芬 王新宇 段亚广", description: "<br>ISBN:9787522722245（语音卷）<br>ISBN:9787522722269（词汇卷）<br>ISBN:9787522722252（口头文化卷）<br>出版社：中国社会科学出版社<br>出版时间：2023"},
+		{title: "中国语言资源集：河南(四卷)", author:"", editor: "辛永芬 王新宇 段亚广", description: "<br>ISBN:9787522722245（语音卷）<br>ISBN:9787522722269（词汇卷）<br>ISBN:9787522722252（口头文化卷）<br>出版社：中国社会科学出版社<br>出版时间：2023"},
 		{title: "广西平南粤方言研究", author: "刘春梅", description: "<br>ISBN:9787522720425<br>出版社：中国社会科学出版社<br>出版时间：2023"},
 		{title: "基于梵语波你尼语法的《唯识三十颂》研究", author: "曹彦", description: "<br>ISBN:9787522722955<br>出版社：中国社会科学出版社<br>出版时间：2023"},
 	    {title: "古汉语语法四论", author: "何莫邪",translator:"万群 邵琛欣 王先云 高笑可", description: "ISBN:9787301342091<br>出版时间：2023-8"},
@@ -665,7 +667,7 @@
             const detailsElement = document.createElement("p");
             // 使用正则表达式移除描述中的<br>标签
             const descriptionText = book.description.replace(/<br>/g, " ");
-            detailsElement.innerHTML = `作者: ${book.author}, 描述: ${descriptionText}`;
+            detailsElement.innerHTML = `作者: ${book.author},译者: ${book.translator}, 编者: ${book.editor}, 描述: ${descriptionText}`;
 
             bookElement.appendChild(titleElement);
             bookElement.appendChild(detailsElement);
