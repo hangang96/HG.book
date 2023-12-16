@@ -281,9 +281,9 @@
 		{title: "《说文解字》注音释义研究", author: "蒋冀骋", description: "<br>ISBN:9787100224062<br>出版社：商务印书馆<br>出版时间：2023"},
 		{title: "自然的概念", author: "怀特海",translator:" 杨富斌 陈伟功", description: "<br>ISBN:9787100230988<br>出版社：商务印书馆<br>出版时间：2023"},
         {title: "手语语言学简明术语", author: "贝皮·范登勃哈尔德 扬·奈恩特维尔哈尔",translator:"付继林 刘鸿宇", description: "<br>ISBN:9787513083195<br>出版社：知识产权出版社<br>出版时间：2023"},
-		{title: "语义论", author: "石安石", description: "<br>ISBN:9787100228862<br>出版社：商务印书馆<br>出版时间：2023"}, 
+		{title: "语义论", author: "石安石", description: "<br>ISBN:9787100228862 <br>出版社：商务印书馆<br>出版时间：2023"}, 
         {title: "理据理论与汉语复合词语义结构：以名词为核心", author: "赵倩", description: "<br>ISBN:9787100227520<br>出版社：商务印书馆<br>出版时间：2023"}, 		
-		{title: "汉藏语是非问句的类型学研究", author: "", description: "<br>ISBN:9787100227803<br>出版社：商务印书馆<br>出版时间：2023"},
+		{title: "汉藏语是非问句的类型学研究", author: "罗天华", description: "<br>ISBN:9787100227803<br>出版社：商务印书馆<br>出版时间：2023"},
 		{title: "杭州方言语法研究", author: "汪化云 姜淑珍", description: "<br>ISBN:9787100229784<br>出版社：商务印书馆<br>出版时间：2023"},			
         {title: "自然语言处理原理与应用", author: "刘刚", description: "<br>ISBN:9787030764225<br>出版社：科学出版社<br>出版时间：2023"},
 		{title: "汉语认证义动词的表达立场表达", author: "兀瑾", description: "<br>ISBN:9787522724799<br>出版社：中国社会科学出版社<br>出版时间：2023"},
@@ -635,7 +635,7 @@
 		performSearch();
 	});
 
-	// 或者你也可以监听回车键来执行搜索
+	// 或者也可以监听回车键来执行搜索
 	const searchInput = document.getElementById("searchInput");
 	searchInput.addEventListener("keypress", (event) => {
 		if (event.key === "Enter") {
@@ -655,10 +655,11 @@
     }
 
     books.forEach(book => {
-        if (
-            book.title.toLowerCase().includes(query) ||
-            book.author.toLowerCase().includes(query) ||
-            book.description.toLowerCase().includes(query)
+       if (
+            book.title && book.title.toLowerCase().includes(query) ||
+            book.author && book.author.toLowerCase().includes(query) ||
+            book.description && book.description.toLowerCase().includes(query) ||
+            book.translator && book.translator.toLowerCase().includes(query)
         ) {
             results.push(book);
         }
