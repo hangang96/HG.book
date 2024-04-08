@@ -1,5 +1,7 @@
 # 新书展架
 
+## 网址更新：https://hangang96.github.io/HG.book/newlib.html
+
 <img width="944" alt="image" src="https://github.com/hangang96/hangang96.github.io-book/assets/77401162/90f144d2-8e1b-4fb2-91c3-990e7538f05f"><br>
 ## 更新（24-3-14）
 
